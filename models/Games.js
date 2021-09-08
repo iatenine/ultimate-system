@@ -5,26 +5,26 @@ class Games extends Model {}
 
 Games.init(
   {
-    gametitle: {
-      primaryKey: true,
+    appId: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      unique: true,
+      primaryKey: true,
+      unique: false,
     },
-    userid: {
+    gameTitle: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "user",
         key: "id",
       },
     },
-    totalplaytime: {
-      type: DataTypes.STRING,
+    totalPlayTime: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
     },
   },
   {
@@ -32,7 +32,7 @@ Games.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "user",
+    modelName: "games",
   }
 );
 

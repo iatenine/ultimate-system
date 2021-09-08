@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
       username: req.body.username,
       password: req.body.password,
     });
-    res.status(200).json(userData);
+    res.status(201).json(userData);
   } catch (err) {
     // console.log(err);
     res.status(400).json(err);
