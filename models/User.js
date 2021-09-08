@@ -46,6 +46,11 @@ User.init(
           user.password = hashPassword(user.password);
         }
       },
+      beforeBulkUpdate: (users) => {
+        for (const user of users) {
+          user.password = hashPassword(user.password);
+        }
+      },
       beforeUpdate: (user) => {
         user.password =
           user.password && user.password != ""
