@@ -25,7 +25,7 @@ User.init(
       allowNull: false,
     },
     steamId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: true,
     },
   },

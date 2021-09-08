@@ -1,0 +1,22 @@
+[
+  {
+    "appId": 10,
+    "gameTitle": "Counter-Stike",
+    "totalPlayTime": 32
+  },
+  {
+    "appId": 20,
+    "gameTitle": "Team Fortress Classic",
+    "totalPlayTime": 3
+  },
+  {
+    "appId": 30,
+    "gameTitle": "Day of Defeat",
+    "totalPlayTime": 6
+  },
+  {
+    "appId": 40,
+    "gameTitle": "Deathmatch Classic",
+    "totalPlayTime": 0
+  }
+]
