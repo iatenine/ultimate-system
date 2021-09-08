@@ -1,8 +1,6 @@
-<section class="container">
-  <h3 class="game-name">{{game.name}}</h3>
-  <section class="flex-row justify-center">
-    {{#each game.name as |games|}}
-    {{> gaming-details}}
-    {{/each}}
-  </section>
+<section class="card">
+  <a href="/game/{{id}}">
+    <header>{{name}}</header>
+    <img src={{img_logo_url}}{{games.[0].filename}}" alt="{{paintings.[0].description}}">
+  </a>
 </section>
