@@ -38,10 +38,12 @@ User.init(
     hooks: {
       beforeCreate: (user) => {
         {
-          user.password =
-            user.password && user.password != ""
-              ? bcrypt.hashSync(user.password, 10)
-              : "";
+          user.password = hashPassword(user.password);
+        }
+      },
+      beforeBulkCreate: (users) => {
+        for (const user of users) {
+          user.password = hashPassword(user.password);
         }
       },
       beforeUpdate: (user) => {
@@ -54,4 +56,7 @@ User.init(
   }
 );
 
+function hashPassword(password) {
+  return password && password != "" ? bcrypt.hashSync(password, 10) : "";
+}
 module.exports = User;
