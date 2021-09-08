@@ -44,23 +44,23 @@
               <a class="nav-link" href="#">Game Library</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">Disabled</a>
+              <a class="nav-link" href="#review">Review</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="modal" tabindex="-1" id="login">
-      <div class="modal-dialog">
+    <div
+      class="modal fade"
+      id="login"
+      aria-hidden="true"
+      aria-labelledby="loginLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark">
           <div class="modal-header">
-            <h5 class="modal-title text-light text-center">Login/Register</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <h5 class="modal-title text-light" id="loginTitle">Login</h5>
           </div>
           <div class="modal-body">
             <form class="bg-dark">
@@ -100,9 +100,50 @@
                   >Keep me logged in</label
                 >
               </div>
-              <button type="submit" class="btn btn-secondary">Login</button>
-              <button class="btn btn-secondary">Register</button>
             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" id="btn-login">
+              Login
+            </button>
+            <button
+              class="btn btn-secondary"
+              data-bs-target="#register"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="register"
+      aria-hidden="true"
+      aria-labelledby="register"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+            <h5 class="modal-title text-light" id="registerTitle">Register</h5>
+          </div>
+          <div class="modal-body text-light">
+            This is where your form would go to register.
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" id="btn-register">
+              Register
+            </button>
+            <button
+              class="btn btn-secondary"
+              data-bs-target="#login"
+              data-bs-toggle="modal"
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>
