@@ -1,7 +1,7 @@
 const User = require("./User");
 const Games = require("./Games");
 
-User.hsaone(Games, {
+User.hasone(Games, {
   foreignKey: "User.id",
   onDelete: "MIT",
 });
