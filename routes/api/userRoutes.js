@@ -7,11 +7,13 @@ const key = "932AC27CD2D71E6D00C5868C5DC322F6";
 // CREATE a new user
 router.post("/", async (req, res) => {
   try {
-    const newUser = req.body;
-    console.log("helo", req.body);
-    const userData = await User.create(newUser);
-    res.status(200).json({});
+    const userData = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+    });
+    res.status(200).json(userData);
   } catch (err) {
+    // console.log(err);
     res.status(400).json(err);
   }
 });
