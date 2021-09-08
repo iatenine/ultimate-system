@@ -1,9 +1,8 @@
 const User = require("./User");
 const Games = require("./Games");
 
-User.hasone(Games, {
+User.hasOne(Games, {
   foreignKey: "User.id",
-  onDelete: "MIT",
 });
 
 Games.belongsTo(User, {
