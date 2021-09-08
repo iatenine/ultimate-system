@@ -1,9 +1,13 @@
 const User = require("./User");
 const Games = require("./Games");
 
-Games.hsaone(User, {
-  foreignKey: "user.id",
+User.hsaone(Games, {
+  foreignKey: "User.id",
   onDelete: "MIT",
+});
+
+Games.belongsTo(User, {
+  foreignKey: "Games.userid",
 });
 
 module.exports = { User, Games };
