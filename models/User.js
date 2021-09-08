@@ -10,13 +10,15 @@ User.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      allowNull: false,
       unique: true,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isAlphanumeric: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -38,14 +40,14 @@ User.init(
         {
           user.password =
             user.password && user.password != ""
-              ? bcrypt.hashSync(user.password, 32)
+              ? bcrypt.hashSync(user.password, 10)
               : "";
         }
       },
       beforeUpdate: (user) => {
         user.password =
           user.password && user.password != ""
-            ? bcrypt.hashSync(user.password, 32)
+            ? bcrypt.hashSync(user.password, 10)
             : "";
       },
     },
