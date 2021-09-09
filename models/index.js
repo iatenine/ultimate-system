@@ -1,12 +1,14 @@
 const User = require("./User");
 const Games = require("./Games");
 
-User.hasOne(Games, {
-  foreignKey: "User.id",
+User.hasMany(Games, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+  hooks: true,
 });
 
 Games.belongsTo(User, {
-  foreignKey: "Games.userid",
+  foreignKey: "id",
 });
 
 module.exports = { User, Games };
