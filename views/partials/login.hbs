@@ -1,0 +1,26 @@
+ <nav>
+    <a href="/">Home</a>
+    {{#if loggedIn}}
+    <button id="logout" class="btn-no-style">Logout</button>
+    {{else}}
+    <button id="login" href="/login">Login</button>
+    {{/if}}
+  </nav>
+  <main>
+    <aside>
+    </aside>
+    <div class="games">
+      {{{body}}}
+    </div>
+  </main>
+  {{{#if loggedIn}}
+ <script src="/js/logout.js"></script>
+
+
+
+{{!-- <script>
+  const logoutBtn = document.getElementById('logout');
+  const loginBtn = document.getElementById('login');
+  if(loginBtn) loginBtn.addEventListener("click", ()=> console.log("YOU CLICKED LOGIN!"));
+  if(logoutBtn) logoutBtn.addEventListener("click", ()=> console.log("YOU CLICKED LOGOUT"));
+</script> --}}
