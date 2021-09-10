@@ -1,8 +1,4 @@
-/* .game-logo {
-  height: 170px;
-} */
-
-body {
-  background-image: url("https://www.sketchappsources.com/resources/source-image/roberto-steam-logo.png");
-  background-color: red;
+* {
+  background-color: red !important;
+  color: green !important;
 }
