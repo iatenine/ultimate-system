@@ -1,12 +1,4 @@
-.game-logo {
-  height: 170px;
-}
-
-a {
-text-decoration: none !important;
-}
-
-.nohyperlink {
-  text-decoration: none !important;
-
+* {
+  background-color: red !important;
+  color: green !important;
 }
