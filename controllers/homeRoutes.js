@@ -1,6 +1,8 @@
 const { response } = require("express");
+const { getGameLibrary } = require("../utils/helpers");
 
 const routerBase = require("express").Router();
+const mockSteamId = "76561197960434622";
 
 routerBase.get("/", (req, res) => {
   if (req.session.loggedIn) {
@@ -12,192 +14,19 @@ routerBase.get("/", (req, res) => {
   res.status(200).end();
 });
 
-routerBase.get("/gamelibrary", function (req, res) {
+routerBase.get("/gamelibrary", async function (req, res) {
   // res.status(200).send("ok confirmed")
+  const library = await getGameLibrary(mockSteamId, 60);
+  const viewLibrary = [];
+  library.forEach((elem) => {
+    viewLibrary.push({
+      gametitle: elem.name,
+      appID: elem.appid,
+    });
+  });
 
   res.render("gamelibrary", {
-    games: [
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-      {
-        gametitle: "COD",
-        appID: 10,
-        image: "https://picsum.photos/500/500",
-      },
-      {
-        gametitle: "GTA",
-        appID: 20,
-        image: "https://picsum.photos/500/500?2",
-      },
-    ],
+    games: viewLibrary,
   });
 });
 
