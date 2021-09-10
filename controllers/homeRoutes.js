@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const routerBase = require("express").Router();
 
 routerBase.get("/", (req, res) => {
@@ -17,7 +19,7 @@ routerBase.get('/gamelibrary', function (req, res) {
    res.render('gamelibrary', {
          games: [
              {
-                 gametitle: `${gametitle}`,
+                 gametitle: "COD",
                  appID: 10,
                  image: 'https://picsum.photos/500/500',
               

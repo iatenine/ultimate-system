@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/iatenine/ultimate-system#readme",
   "dependencies": {
+    "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
     "cookie-parser": "^1.4.5",
@@ -30,6 +31,7 @@
     "handlebars": "^4.7.6",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.12",
+    "save": "^2.4.0",
     "sequelize": "^6.3.5",
     "tailwindcss": "^2.2.11"
   }
