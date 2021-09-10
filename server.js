@@ -51,48 +51,16 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/details', function (req, res) {
-    res.render('details', {
-        games: [
-            {
-                username: "Peter",
-                games: 'COD',
-                image: 'https://picsum.photos/500/500',
-                comments: [
-                    'This is the first comment',
-                    'This is the second comment',
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-                ]
-            },
-            {
-                username: 'John Doe',
-                games: "GTA",
-                image: 'https://picsum.photos/500/500?2',
-                comments: [
-                ]
-            }
-        ]
-    });
-  });
-
   app.get('/profilepage', function (req, res) {
     res.render('profilepage', {
-        games: [
+        profiledetails: [
             {
                 username: "Peter",
-                games: 'COD',
-                image: 'https://picsum.photos/500/500',
-                comments: [
-                    'This is the first comment',
-                    'This is the second comment',
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-                ]
-            },
-            {
-                username: 'John Doe',
-                games: "GTA",
-                image: 'https://picsum.photos/500/500?2',
-                comments: [
+                steamUID: 'COD',
+                image : 'https://picsum.photos/500/500?2',
+                zipCode: "80016",
+                comments:
+                [
                 ]
             }
         ]
