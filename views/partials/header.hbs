@@ -54,13 +54,14 @@
           <div class="modal-body">
             <form class="bg-dark">
               <div class="mb-3">
-                <label for="userEmail" class="form-label text-light text-center"
-                  >Email address</label
+                <label for="username" class="form-label text-light text-center"
+                  >User Name</label
                 >
+                {{!-- //logged in --}}
                 <input
-                  type="email"
+                  type="text"
                   class="form-control bg-secondary"
-                  id="userEmail"
+                  id="username"
                   aria-describedby="emailHelp"
                 />
                 <div id="emailHelp" class="form-text text-light">
@@ -89,7 +90,8 @@
                   >Keep me logged in</label
                 >
               </div>
-              <button type="submit" class="btn btn-secondary">Login</button>
+              <button id = "stayloggedin" type="submit" class="btn btn-secondary">Login</button>
+              {{!-- <a href="/details"></a> --}}
             </form>
           </div>
           <div class="modal-footer">
@@ -106,6 +108,7 @@
       </div>
     </div>
     <div
+    {{!-- // registration box --}}
       class="modal fade"
       id="register"
       aria-hidden="true"
@@ -121,10 +124,10 @@
             <form class="bg-dark">
               <div class="mb-3">
                 <label for="userEmail" class="form-label text-light text-center"
-                  >Email address</label
+                  >User Name</label
                 >
                 <input
-                  type="email"
+                  type="text"
                   class="form-control bg-secondary"
                   id="userEmail"
                   aria-describedby="emailHelp"
@@ -135,14 +138,14 @@
               </div>
               <div class="mb-3">
                 <label
-                  for="userPassword"
+                  for="registerPassword"
                   class="form-label text-light text-center"
                   >Password</label
                 >
                 <input
                   type="password"
                   class="form-control bg-secondary"
-                  id="userPassword"
+                  id="registerPassword"
                 />
               </div>
               <div class="mb-3">
@@ -165,7 +168,7 @@
                   id="zipCode"
                 />
               </div>
-              <button type="submit" class="btn btn-secondary">Register</button>
+              <button id="registerID" class="btn btn-secondary">Register</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -174,6 +177,9 @@
               data-bs-target="#login"
               data-bs-toggle="modal"
             >
-              <a href="/details">Login</a>
+            login
+              {{!-- <a href="/details">Login</a> --}}
             </button>
+
+            <script src="/js/login.js"></script>
           </div>

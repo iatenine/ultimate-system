@@ -75,6 +75,35 @@ app.get('/details', function (req, res) {
     });
   });
 
+  app.get('/profilepage', function (req, res) {
+    res.render('profilepage', {
+        games: [
+            {
+                username: "Peter",
+                games: 'COD',
+                image: 'https://picsum.photos/500/500',
+                comments: [
+                    'This is the first comment',
+                    'This is the second comment',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
+                ]
+            },
+            {
+                username: 'John Doe',
+                games: "GTA",
+                image: 'https://picsum.photos/500/500?2',
+                comments: [
+                ]
+            }
+        ]
+    });
+  });
+
+  //route to test variable access by main layout
+  app.get('/test/auth', function(req,res)  {
+    res.render("")
+  })
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
