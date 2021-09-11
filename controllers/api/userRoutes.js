@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Games } = require("../../models");
 const User = require("../../models/User");
 const {
   getUserbyUsername,
@@ -75,6 +76,26 @@ router.put("/", async (req, res) => {
     res.status(201).json(result);
   } catch (err) {
     console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+router.get("/library/:id", async (req, res) => {
+  try {
+    const library = await User.findOne({
+      where: { id: req.params.id },
+      attributes: ["username", "steamId"],
+      include: [
+        {
+          model: Games,
+          attributes: ["appId", "gameTitle", "totalPlayTime"],
+        },
+      ],
+    });
+    if (library) res.status(200).json(library);
+    res.status(404).end();
+  } catch (err) {
+    console.error(err);
     res.status(500).send(err);
   }
 });
