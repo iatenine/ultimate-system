@@ -26,7 +26,8 @@ User.init(
       allowNull: false,
     },
     steamId: {
-      type: DataTypes.BIGINT,
+      // Need to support very large numbers
+      type: DataTypes.STRING,
       allowNull: true,
     },
     email: {

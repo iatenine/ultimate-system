@@ -103,7 +103,7 @@ router.get("/library/:id", async (req, res) => {
 // Logout user and end session
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.status(200).end();
+    res.redirect("/");
   });
 });
 
