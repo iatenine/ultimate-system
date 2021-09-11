@@ -1,6 +1,5 @@
 const { response } = require("express");
 const { getGameLibrary } = require("../utils/helpers");
-
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622";
 

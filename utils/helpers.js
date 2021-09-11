@@ -1,4 +1,6 @@
 const axios = require("axios");
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 async function getGameLibrary(steamId, limit) {
   if (!steamId) {
@@ -21,4 +23,34 @@ async function getGameLibrary(steamId, limit) {
   return sortedGames;
 }
 
-module.exports = { getGameLibrary };
+async function getUserbyUsername(query) {
+  try {
+    const result = await User.findOne({
+      where: { username: query },
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+const getSessionUser = async (req) => {
+  if (!isSessionActive(req)) return null;
+  return await User.findByPk(req.session.userId);
+};
+
+function isSessionActive(req) {
+  return req.session.loggedIn && req.session.userId;
+}
+
+function checkPassword(password, hashedPassword) {
+  return bcrypt.compareSync(password, hashedPassword);
+}
+
+module.exports = {
+  getGameLibrary,
+  getUserbyUsername,
+  getSessionUser,
+  checkPassword,
+};
