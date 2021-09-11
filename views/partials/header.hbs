@@ -1,3 +1,5 @@
+{{! Navbar }}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-column">
   <div class="text-center w-100 d-block">
     <a class="navbar-brand" href="#">US</a>
@@ -23,6 +25,8 @@
           <a class="nav-link" href="#review">Review</a>
         </li>
         <li class="nav-item ms-auto">
+          {{! Display if loggedin set to false }}
+          {{!-- {{#if loggedIn}} --}}
           <p
             class="nav-link active"
             aria-current="page"
@@ -31,11 +35,27 @@
           >
             Login/Register
           </p>
+          {{! Display if logged in }}
+          {{!-- {{#else}} --}}
+          <p
+            id="logout-btn"
+            class="nav-link active"
+            aria-current="page"
+            data-bs-toggle="modal"
+            data-bs-target="#logout"
+          >
+            Logout
+          </p>
+          <script src="./js/logout.js"></script>
+          {{!-- {{/if}} --}}
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+{{! Login Modal }}
+
 <div
   class="modal fade"
   id="login"
@@ -101,8 +121,10 @@
     </div>
   </div>
 </div>
+
+{{! Registration Modal }}
+
 <div
-  {{! // registration box }}
   class="modal fade"
   id="register"
   aria-hidden="true"
