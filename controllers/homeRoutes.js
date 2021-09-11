@@ -1,17 +1,16 @@
 const { response } = require("express");
 const { getGameLibrary } = require("../utils/helpers");
-
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622";
 
 routerBase.get("/", (req, res) => {
   if (req.session.loggedIn) {
     console.log("logged in");
-    res.render("../views/layouts/main.handlebars", {});
+    res.render("../views/home.hbs", {});
   } else {
+    res.render("../views/welcome.hbs", {});
     console.log("Nope");
   }
-  res.status(200).end();
 });
 
 routerBase.get("/gamelibrary", async function (req, res) {

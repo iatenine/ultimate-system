@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const User = require("../../models/User");
-const bcrypt = require("bcrypt");
+const {
+  getUserbyUsername,
+  checkPassword,
+  getSessionUser,
+} = require("../../utils/helpers");
 
 // Steam API key
 const key = "932AC27CD2D71E6D00C5868C5DC322F6";
@@ -8,21 +12,19 @@ const key = "932AC27CD2D71E6D00C5868C5DC322F6";
 // Login
 router.post("/login", async (req, res) => {
   try {
-    const result = await User.findOne({
-      where: { username: req.body.username },
-    });
+    const result = await getUserbyUsername(req.body.username);
     if (!result) res.status(400).end();
     const success = checkPassword(req.body.password, result.password);
     if (!success) res.status(403).end();
-
     // Update session store
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      req.session.userId = result.id;
-      res.status(200).json(result);
-    });
+    else
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.userId = result.id;
+        res.status(200).json(result);
+      });
   } catch (err) {
-    console.log(err);
+    console.log("This is an error: ", err);
     res.status(500).send(err);
   }
 });
@@ -77,23 +79,17 @@ router.put("/", async (req, res) => {
   }
 });
 
+// Logout user and end session
+router.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.status(200).end();
+  });
+});
+
 router.get("/", async (req, res) => {
   const sessionUser = await getSessionUser(req);
   if (!sessionUser) res.status(403).end();
   res.status(200).json(sessionUser);
 });
-
-const getSessionUser = async (req) => {
-  if (!isSessionActive(req)) return null;
-  return await User.findByPk(req.session.userId);
-};
-
-function isSessionActive(req) {
-  return req.session.loggedIn && req.session.userId;
-}
-
-function checkPassword(password, hashedPassword) {
-  return bcrypt.compareSync(password, hashedPassword);
-}
 
 module.exports = router;
