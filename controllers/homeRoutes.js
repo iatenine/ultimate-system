@@ -14,18 +14,24 @@ routerBase.get("/", (req, res) => {
 });
 
 routerBase.get("/gamelibrary", async function (req, res) {
-  const library = await getGameLibrary(mockSteamId, 60);
-  const viewLibrary = [];
-  library.forEach((elem) => {
-    viewLibrary.push({
-      gametitle: elem.name,
-      appID: elem.appid,
-    });
-  });
+  try {
+    const library = await getGameLibrary(mockSteamId, 60);
+    const viewLibrary = [];
+    if (library.length > 0)
+      library.forEach((elem) => {
+        viewLibrary.push({
+          gametitle: elem.name,
+          appID: elem.appid,
+        });
+      });
 
-  res.render("gamelibrary", {
-    games: viewLibrary,
-  });
+    res.render("gamelibrary", {
+      games: viewLibrary,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 });
 
 module.exports = routerBase;
