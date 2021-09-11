@@ -4,17 +4,16 @@ const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622";
 
 routerBase.get("/", (req, res) => {
-  if (req.session.loggedIn) {
-    console.log("logged in");
-    res.render("../views/home.hbs", {});
-  } else {
-    res.render("../views/welcome.hbs", {});
-    console.log("Nope");
-  }
+  req.session.loggedIn
+    ? res.render("../views/home.hbs", {
+        loggedIn: true,
+      })
+    : res.render("../views/welcome.hbs", {
+        loggedIn: false,
+      });
 });
 
 routerBase.get("/gamelibrary", async function (req, res) {
-  // res.status(200).send("ok confirmed")
   const library = await getGameLibrary(mockSteamId, 60);
   const viewLibrary = [];
   library.forEach((elem) => {
