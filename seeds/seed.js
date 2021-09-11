@@ -4,10 +4,6 @@ const { Games, User } = require("../models");
 const userSeedData = require("./userSeedData.json");
 const gameSeedData = require("./gameSeedData.json");
 
-gameSeedData.forEach((elem) => {
-  elem["userId"] = 1;
-});
-
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
   const users = await User.bulkCreate(userSeedData);

@@ -2,17 +2,43 @@
   {
     "appId": 10,
     "gameTitle": "Counter-Stike",
-    "totalPlayTime": 32
+    "totalPlayTime": 32,
+    "user_id": 1
   },
   {
     "appId": 20,
     "gameTitle": "Team Fortress Classic",
-    "totalPlayTime": 3
+    "totalPlayTime": 3,
+    "user_id": 1
   },
   {
     "appId": 30,
     "gameTitle": "Day of Defeat",
-    "totalPlayTime": 6
+    "totalPlayTime": 6,
+    "user_id": 1
+  },
+  {
+    "appId": 40,
+    "gameTitle": "Deathmatch Classic",
+    "totalPlayTime": 0
+  },
+  {
+    "appId": 10,
+    "gameTitle": "Counter-Stike",
+    "totalPlayTime": 32,
+    "user_id": 2
+  },
+  {
+    "appId": 20,
+    "gameTitle": "Team Fortress Classic",
+    "totalPlayTime": 3,
+    "user_id": 2
+  },
+  {
+    "appId": 30,
+    "gameTitle": "Day of Defeat",
+    "totalPlayTime": 6,
+    "user_id": 2
   },
   {
     "appId": 40,
