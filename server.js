@@ -28,50 +28,43 @@ app.use(session(sess));
 app.use(cookieParser());
 const hbs = exphbs.create({});
 
-
-app.engine('hbs', exphbs({
-  defaultLayout: 'index',
-  extname: '.hbs',
-  helpers: {
-    getShortComment(comment) {
+app.engine(
+  "hbs",
+  exphbs({
+    defaultLayout: "index",
+    extname: ".hbs",
+    helpers: {
+      getShortComment(comment) {
         if (comment.length < 64) {
-            return comment;
+          return comment;
         }
 
-        return comment.substring(0, 61) + '...';
-    }
-}
-}));
+        return comment.substring(0, 61) + "...";
+      },
+    },
+  })
+);
 
 app.set("view engine", "hbs");
 
-app.get('/', function (req, res) {
-  res.render('home', {
-     
-  });
-});
+// app.get("/profilepage", function (req, res) {
+//   res.render("profilepage", {
+//     profiledetails: [
+//       {
+//         username: "Peter",
+//         steamUID: "COD",
+//         image: "https://picsum.photos/500/500?2",
+//         zipCode: "80016",
+//         comments: [],
+//       },
+//     ],
+//   });
+// });
 
-  app.get('/profilepage', function (req, res) {
-    res.render('profilepage', {
-        profiledetails: [
-            {
-                username: "Peter",
-                steamUID: 'COD',
-                image : 'https://picsum.photos/500/500?2',
-                zipCode: "80016",
-                comments:
-                [
-                ]
-            }
-        ]
-    });
-  });
-
-  //route to test variable access by main layout
-  app.get('/test/auth', function(req,res)  {
-    res.render("")
-  })
-
+// //route to test variable access by main layout
+// app.get("/test/auth", function (req, res) {
+//   res.render("");
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
