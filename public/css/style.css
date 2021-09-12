@@ -15,10 +15,26 @@ footer {
 }
 
 h1 {
-  font-family: "Press Start 2P", cursive;
-  font-size: 58px !important;
+  font-family: "Libre Barcode 128 Text", cursive;
+  font-size: 65px !important;
 }
 
 a {
   color: white;
+}
+
+.card-img-top {
+  max-height: 100%;
+}
+
+.card {
+  width: auto;
+  height: 96%;
+  background-color: darkslategrey;
+}
+
+.card-body {
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
 }
