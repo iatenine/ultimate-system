@@ -1,0 +1,40 @@
+body {
+  background-image: url("https://www.pcgamesn.com/wp-content/uploads/legacy/steam_logo_0-590x332.jpg");
+  background-position: center;
+}
+
+nav {
+  background-image: url("https://m.gjcdn.net/game-header/950/328249-qdvjjwua-v4.jpg");
+  background-blend-mode: soft-light;
+  background-size: 100%;
+  background-position: center;
+}
+
+footer {
+  background-image: url("https://i.pinimg.com/originals/f9/10/93/f91093b7300c29a32145131a7762b70f.jpg");
+}
+
+h1 {
+  font-family: "VT323", monospace;
+  font-size: 65px !important;
+}
+
+a {
+  color: white;
+}
+
+.card-img-top {
+  max-height: 100%;
+}
+
+.card {
+  width: auto;
+  height: 96%;
+  background-color: darkslategrey;
+}
+
+.card-body {
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+}

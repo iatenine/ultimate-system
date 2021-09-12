@@ -1,16 +1,21 @@
 <div class="games">
-    <div class="row justify-content-center">
-        {{#each games}}
-        <div class="col-sm-2" style="margin-top: 50px;">
-            <div class="card">
+  <div class="row justify-content-center">
+    {{#each games}}
+      <div class="col-sm-3" style="margin-top: 50px;">
+        <div class="card">
 
-                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/{{this.appID}}/header.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Game Title: {{this.gametitle}}</h5>
+          <img
+            src="https://cdn.cloudflare.steamstatic.com/steam/apps/{{this.appID}}/header.jpg"
+            class="card-img-top"
+            alt="video game image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{this.gametitle}}</h5>
+            <a href="#" class="btn btn-success mt-auto">Find other players</a>
 
-                </div>
-            </div>
+          </div>
         </div>
-        {{/each}}
-    </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
