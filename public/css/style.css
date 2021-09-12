@@ -1,6 +1,7 @@
 body {
   background-image: url("https://www.pcgamesn.com/wp-content/uploads/legacy/steam_logo_0-590x332.jpg");
   background-position: center;
+  color: greenyellow;
 }
 
 nav {
@@ -16,6 +17,9 @@ footer {
 
 h1 {
   font-family: "VT323", monospace;
+  color: greenyellow;
+  text-align: center;
+  margin-top: 100px;
   font-size: 65px !important;
 }
 
@@ -30,7 +34,7 @@ a {
 .card {
   width: auto;
   height: 96%;
-  background-color: darkslategrey;
+  background-color: greenyellow;
 }
 
 .card-body {
