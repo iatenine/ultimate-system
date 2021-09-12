@@ -1,7 +1,6 @@
 body {
-  background-image: url("https://www.pcgamesn.com/wp-content/uploads/legacy/steam_logo_0-590x332.jpg");
+  background-image: url("https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fcdn.wallpapersafari.com%2F75%2F51%2FZM6vbY.png");
   background-position: center;
-  color: greenyellow;
 }
 
 nav {
@@ -9,6 +8,10 @@ nav {
   background-blend-mode: soft-light;
   background-size: 100%;
   background-position: center;
+}
+
+nav a {
+  color: red;
 }
 
 footer {
@@ -23,22 +26,26 @@ h1 {
   font-size: 65px !important;
 }
 
-a {
-  color: white;
-}
-
 .card-img-top {
   max-height: 100%;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: auto;
-  height: 96%;
-  background-color: greenyellow;
+  height: 100%;
 }
 
 .card-body {
-  margin-bottom: auto;
   display: flex;
   flex-direction: column;
+  background-color: slategray;
+  overflow: hidden;
+}
+
+.card-title {
+  color: black;
+  height: 100%;
+  overflow-y: ellipsis;
 }
