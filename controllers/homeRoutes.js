@@ -1,6 +1,11 @@
-const User = require("../models/User");
-const { getGameLibrary, getSessionUser } = require("../utils/helpers");
+const {
+  getGameLibrary,
+  getPlayersWithGame,
+  getSessionUser,
+  getUserById,
+} = require("../utils/helpers");
 const routerBase = require("express").Router();
+const User = require("../models/User");
 const mockSteamId = "76561197960434622";
 
 routerBase.get("/profile", (req, res) => {
@@ -11,6 +16,8 @@ routerBase.get("/profile", (req, res) => {
     zipCode: "A7B2S1",
   });
 });
+
+
 
 routerBase.get("/", (req, res) => {
   req.session.loggedIn
