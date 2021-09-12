@@ -18,6 +18,7 @@ User.init(
       unique: true,
       validate: {
         isAlphanumeric: true,
+        len: [4, 15],
       },
     },
     password: {
@@ -25,8 +26,24 @@ User.init(
       allowNull: false,
     },
     steamId: {
-      type: DataTypes.BIGINT,
+      // Need to support very large numbers
+      type: DataTypes.STRING,
       allowNull: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    zipcode: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [5, 6],
+      },
     },
   },
   {
