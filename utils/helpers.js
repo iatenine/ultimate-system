@@ -1,5 +1,6 @@
 const axios = require("axios");
 const User = require("../models/User");
+const Games = require("../models/Games");
 const bcrypt = require("bcrypt");
 
 async function getGameLibrary(steamId, limit) {
@@ -28,11 +29,35 @@ async function getGameLibrary(steamId, limit) {
   }
 }
 
+async function getPlayersWithGame(appId) {
+  const users = await User.findAll({
+    include: {
+      model: Games,
+      where: {
+        app_id: appId,
+      },
+      attributes: ["gameTitle", "totalPlayTime"],
+    },
+    attributes: ["username", "steamId", "zipcode"],
+  });
+  return users;
+}
+
 async function getUserbyUsername(query) {
   try {
     const result = await User.findOne({
       where: { username: query },
     });
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function getUserById(id) {
+  try {
+    const result = await User.findByPk(id);
     return result;
   } catch (error) {
     console.error(error);
@@ -54,6 +79,8 @@ function checkPassword(password, hashedPassword) {
 }
 
 module.exports = {
+  getUserById,
+  getPlayersWithGame,
   getGameLibrary,
   getUserbyUsername,
   getSessionUser,
