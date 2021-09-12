@@ -7,7 +7,6 @@ Games.init(
   {
     appId: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       unique: false,
     },
     gameTitle: {
