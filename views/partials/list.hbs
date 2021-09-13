@@ -1,0 +1,23 @@
+<div class="profile">
+  <div class="row justify-content-center">
+    {{#each profile}}
+      <div class="col-sm-3" style="margin-top: 60px;">
+        <div class="card">
+
+          <img
+            src="https://www.logodesign.net/logo/monkey-face-character-with-antenna-and-game-console-1544ld.png?size=2&industry=video-game"
+            class="card-img-top"
+            alt=""
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{this.username}}</h5>
+            <h5 class="card-title">{{this.steamUID}}</h5>
+
+            <h5 class="card-title">{{this.zipCode}}</h5>
+
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
