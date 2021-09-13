@@ -5,7 +5,7 @@ const {
 } = require("../utils/helpers");
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622"; // For development purposes only
-// https://steamcommunity.com/{steamId}  link for getting profile pages
+// https://steamcommunity.com/{{steamUID}}  link for getting profile pages
 
 // Base home page route, only one accessible when not logged in
 routerBase.get("/", (req, res) => {
@@ -76,7 +76,7 @@ routerBase.get("/findmatches/:id", async (req, res) => {
     if (elem.dataValues.username !== currentUser.dataValues.username) {
       const newData = {
         username: elem.dataValues.username,
-        steamUID: elem.dataValues.steamId,
+        steamID: elem.dataValues.steamId,
         zipCode: elem.dataValues.zipcode,
       };
       playerData.push(newData);
