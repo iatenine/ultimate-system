@@ -66,7 +66,8 @@ async function getUserbyUsername(query) {
 
 async function updateGameDatabase(user) {
   const steamId = user.dataValues.steamId;
-  const library = await getGameLibrary(steamId);
+  const rawLib = await getGameLibrary(steamId);
+  const library = rawLib.slice(0, 120);
   if (library.length > 0)
     library.forEach(async (elem) => {
       try {
@@ -77,17 +78,25 @@ async function updateGameDatabase(user) {
           },
         });
         if (!findGame)
-          Games.create({
-            userId: user.dataValues.id,
-            steamId: elem.steamId,
-            appId: elem.appid,
-            gameTitle: elem.name,
-            totalPlayTime: elem.playtime_forever,
-          });
+          try {
+            Games.create({
+              userId: user.dataValues.id,
+              steamId: elem.steamId,
+              appId: elem.appid,
+              gameTitle: elem.name,
+              totalPlayTime: elem.playtime_forever,
+            });
+          } catch (err) {
+            console.error(err);
+          }
         else
-          Games.update({
-            totalPlayTime: elem.playtime_forever,
-          });
+          try {
+            Games.update({
+              totalPlayTime: elem.playtime_forever,
+            });
+          } catch (err) {
+            console.error(err);
+          }
       } catch (err) {
         console.error(err);
       }
