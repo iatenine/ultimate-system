@@ -1,4 +1,8 @@
-const { getGameLibrary, getSessionUser } = require("../utils/helpers");
+const {
+  getGameLibrary,
+  getSessionUser,
+  getPlayersWithGame,
+} = require("../utils/helpers");
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622"; // For development purposes only
 // https://steamcommunity.com/{steamId}  link for getting profile pages
@@ -62,31 +66,24 @@ routerBase.get("/gamelibrary", async function (req, res) {
 });
 
 // Find matches for a game of given id
-routerBase.get("/findmatches/:id", (req, res) => {
+routerBase.get("/findmatches/:id", async (req, res) => {
   if (!req?.session?.loggedIn) res.redirect("/");
+  const currentUser = await getSessionUser(req);
+  const players = await getPlayersWithGame(req.params.id);
+  const playerData = [];
+  players.forEach((elem) => {
+    // Exclude user's own profile
+    if (elem.dataValues.username !== currentUser.dataValues.username) {
+      const newData = {
+        username: elem.dataValues.username,
+        steamUID: elem.dataValues.steamId,
+        zipCode: elem.dataValues.zipcode,
+      };
+      playerData.push(newData);
+    }
+  });
   res.render("../views/profilelist.hbs", {
-    profile: [
-      {
-        username: "Henry",
-        steamUID: mockSteamId,
-        zipCode: 19703,
-      },
-      {
-        username: "Mike",
-        steamUID: mockSteamId,
-        zipCode: 90210,
-      },
-      {
-        username: "Billy",
-        steamUID: mockSteamId,
-        zipCode: 80016,
-      },
-      {
-        username: "Lucy",
-        steamUID: mockSteamId,
-        zipCode: 32305,
-      },
-    ],
+    profile: playerData,
   });
 });
 
