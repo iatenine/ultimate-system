@@ -32,13 +32,14 @@ const registerHandler = async (event) => {
   // TODO: Add a comment describing the functionality of these expressions
   const username = document.querySelector("#userEmail").value.trim();
   const password = document.querySelector("#registerPassword").value.trim();
-  const steamID = document.querySelector("#steamUID").value.trim();
+  const steamId = document.querySelector("#steamUID").value.trim();
+  const zipcode = document.querySelector("#zipCode").value.trim();
 
   if (username && password) {
     // TODO: Add a comment describing the functionality of this expression
     const response = await fetch("/api/users/", {
       method: "POST",
-      body: JSON.stringify({ username, password, steamID }),
+      body: JSON.stringify({ username, password, steamId, zipcode }),
       headers: { "Content-Type": "application/json" },
     });
 

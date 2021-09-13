@@ -12,7 +12,7 @@ const mockSteamId = "76561197960434622"; // For development purposes only
 routerBase.get("/", async (req, res) => {
   if (req.session.loggedIn) {
     const user = await getSessionUser(req);
-    updateGameDatabase(user);
+    await updateGameDatabase(user);
     res.redirect("/gamelibrary");
   } else
     res.render("../views/welcome.hbs", {
