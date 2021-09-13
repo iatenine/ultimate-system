@@ -1,19 +1,23 @@
 const {
-  getGameLibrary,
   getSessionUser,
   getPlayersWithGame,
+  updateGameDatabase,
+  getGamesFromDb,
 } = require("../utils/helpers");
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622"; // For development purposes only
 // https://steamcommunity.com/{{steamUID}}  link for getting profile pages
 
 // Base home page route, only one accessible when not logged in
-routerBase.get("/", (req, res) => {
-  req.session.loggedIn
-    ? res.redirect("/gamelibrary")
-    : res.render("../views/welcome.hbs", {
-        loggedIn: false,
-      });
+routerBase.get("/", async (req, res) => {
+  if (req.session.loggedIn) {
+    const user = await getSessionUser(req);
+    updateGameDatabase(user);
+    res.redirect("/gamelibrary");
+  } else
+    res.render("../views/welcome.hbs", {
+      loggedIn: false,
+    });
 });
 
 // View user's profile page
@@ -38,27 +42,19 @@ routerBase.get("/profile", async (req, res) => {
 routerBase.get("/gamelibrary", async function (req, res) {
   if (!req?.session?.loggedIn) res.redirect("/");
   try {
-    const user = await getSessionUser(req);
-    if (!user.dataValues.steamId)
-      res.render("gamelibrary", {
-        games: [],
-      });
-    else {
-      const steamId = user.dataValues.steamId.toString();
-      const library = await getGameLibrary(steamId, 120);
-      const viewLibrary = [];
-      if (library.length > 0)
-        library.forEach((elem) => {
-          viewLibrary.push({
-            gametitle: elem.name,
-            appID: elem.appid,
-          });
-        });
+    const gameList = await getGamesFromDb(req.session.userId);
+    const viewLibrary = [];
 
-      res.render("gamelibrary", {
-        games: viewLibrary,
+    gameList.forEach((game) => {
+      viewLibrary.push({
+        gametitle: game.gameTitle,
+        appID: game.appId,
       });
-    }
+    });
+
+    res.render("gamelibrary", {
+      games: viewLibrary,
+    });
   } catch (err) {
     console.error("Error is here: ", err);
     res.status(500).send("Server Error");
@@ -76,7 +72,7 @@ routerBase.get("/findmatches/:id", async (req, res) => {
     if (elem.dataValues.username !== currentUser.dataValues.username) {
       const newData = {
         username: elem.dataValues.username,
-        steamID: elem.dataValues.steamId,
+        steamUID: elem.dataValues.steamId,
         zipCode: elem.dataValues.zipcode,
       };
       playerData.push(newData);
