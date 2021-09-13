@@ -1,21 +1,23 @@
-const { Games } = require("../models");
 const {
-  getGameLibrary,
   getSessionUser,
   getPlayersWithGame,
   updateGameDatabase,
+  getGamesFromDb,
 } = require("../utils/helpers");
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622"; // For development purposes only
 // https://steamcommunity.com/{{steamUID}}  link for getting profile pages
 
 // Base home page route, only one accessible when not logged in
-routerBase.get("/", (req, res) => {
-  req.session.loggedIn
-    ? res.redirect("/gamelibrary")
-    : res.render("../views/welcome.hbs", {
-        loggedIn: false,
-      });
+routerBase.get("/", async (req, res) => {
+  if (req.session.loggedIn) {
+    const user = await getSessionUser(req);
+    updateGameDatabase(user);
+    res.redirect("/gamelibrary");
+  } else
+    res.render("../views/welcome.hbs", {
+      loggedIn: false,
+    });
 });
 
 // View user's profile page
@@ -40,18 +42,15 @@ routerBase.get("/profile", async (req, res) => {
 routerBase.get("/gamelibrary", async function (req, res) {
   if (!req?.session?.loggedIn) res.redirect("/");
   try {
-    const user = await getSessionUser(req);
-    updateGameDatabase(user);
-    const steamId = user.dataValues.steamId.toString();
-    const library = await getGameLibrary(steamId, 120);
+    const gameList = await getGamesFromDb(req.session.userId);
     const viewLibrary = [];
-    if (library.length > 0 && user.dataValues.steamId)
-      library.forEach(async (elem) => {
-        viewLibrary.push({
-          gametitle: elem.name,
-          appID: elem.appid,
-        });
+
+    gameList.forEach((game) => {
+      viewLibrary.push({
+        gametitle: game.gameTitle,
+        appID: game.appId,
       });
+    });
 
     res.render("gamelibrary", {
       games: viewLibrary,
