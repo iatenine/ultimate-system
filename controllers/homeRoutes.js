@@ -67,9 +67,24 @@ routerBase.get("/findmatches/:id", (req, res) => {
   res.render("../views/profilelist.hbs", {
     profile: [
       {
-        username: "Mock username",
+        username: "Henry",
+        steamUID: mockSteamId,
+        zipCode: 19703,
+      },
+      {
+        username: "Mike",
         steamUID: mockSteamId,
         zipCode: 90210,
+      },
+      {
+        username: "Billy",
+        steamUID: mockSteamId,
+        zipCode: 80016,
+      },
+      {
+        username: "Lucy",
+        steamUID: mockSteamId,
+        zipCode: 32305,
       },
     ],
   });
