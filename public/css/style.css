@@ -1,6 +1,7 @@
 body {
   background-image: url("https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fcdn.wallpapersafari.com%2F75%2F51%2FZM6vbY.png");
   background-position: center;
+  padding-bottom: 95px;
 }
 
 nav {
@@ -30,6 +31,11 @@ h1 {
   max-height: 100%;
 }
 
+.card-img-top-top {
+  max-width: 100%;
+  max-height: auto;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -44,8 +50,26 @@ h1 {
   overflow: hidden;
 }
 
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 100%;
+}
+
+.profile-card-body {
+  display: flex;
+  flex-direction: column;
+  background-color: slategray;
+}
+
 .card-title {
   color: black;
   height: 100%;
   overflow-y: ellipsis;
+}
+
+.profile-card-title {
+  font-size: 22px;
+  height: 100%;
 }
