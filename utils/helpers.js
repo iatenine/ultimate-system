@@ -44,12 +44,18 @@ async function getPlayersWithGame(appId) {
 }
 
 async function getGamesFromDb(userId) {
-  const result = await User.findByPk(userId, {
-    include: {
-      model: Games,
-    },
-  });
-  return result.dataValues.games.slice(0, 120);
+  try {
+    const result = await User.findByPk(userId, {
+      include: {
+        model: Games,
+        order: [["totalPlayTime", "DESC"]],
+      },
+      limit: 120,
+    });
+    return result.dataValues.games;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 async function getUserbyUsername(query) {
