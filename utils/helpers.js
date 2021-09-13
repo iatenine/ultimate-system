@@ -43,6 +43,15 @@ async function getPlayersWithGame(appId) {
   return users;
 }
 
+async function getGamesFromDb(userId) {
+  const result = await User.findByPk(userId, {
+    include: {
+      model: Games,
+    },
+  });
+  return result.dataValues.games.slice(0, 120);
+}
+
 async function getUserbyUsername(query) {
   try {
     const result = await User.findOne({
@@ -53,6 +62,36 @@ async function getUserbyUsername(query) {
     console.error(error);
     return null;
   }
+}
+
+async function updateGameDatabase(user) {
+  const steamId = user.dataValues.steamId;
+  const library = await getGameLibrary(steamId);
+  if (library.length > 0)
+    library.forEach(async (elem) => {
+      try {
+        const findGame = await Games.findOne({
+          where: {
+            appId: elem.appid,
+            userId: user.dataValues.id,
+          },
+        });
+        if (!findGame)
+          Games.create({
+            userId: user.dataValues.id,
+            steamId: elem.steamId,
+            appId: elem.appid,
+            gameTitle: elem.name,
+            totalPlayTime: elem.playtime_forever,
+          });
+        else
+          Games.update({
+            totalPlayTime: elem.playtime_forever,
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    });
 }
 
 async function getUserById(id) {
@@ -85,4 +124,6 @@ module.exports = {
   getUserbyUsername,
   getSessionUser,
   checkPassword,
+  updateGameDatabase,
+  getGamesFromDb,
 };
