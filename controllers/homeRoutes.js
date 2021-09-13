@@ -1,37 +1,39 @@
-const {
-  getGameLibrary,
-  getPlayersWithGame,
-  getSessionUser,
-  getUserById,
-} = require("../utils/helpers");
+const { getGameLibrary, getSessionUser } = require("../utils/helpers");
 const routerBase = require("express").Router();
-const User = require("../models/User");
-const mockSteamId = "76561197960434622";
+const mockSteamId = "76561197960434622"; // For development purposes only
+// https://steamcommunity.com/{steamId}  link for getting profile pages
 
-routerBase.get("/profile", (req, res) => {
-  res.render("../views/profilepage.hbs", {
-    username: "The Name",
-    steamUID: "75664561456475",
-    email: "hello@somewhere.com",
-    zipCode: "A7B2S1",
-  });
-});
-
-
-
+// Base home page route, only one accessible when not logged in
 routerBase.get("/", (req, res) => {
   req.session.loggedIn
-    ? res.render("../views/home.hbs", {
-        loggedIn: true,
-      })
+    ? res.redirect("/gamelibrary")
     : res.render("../views/welcome.hbs", {
         loggedIn: false,
       });
 });
 
-routerBase.get("/gamelibrary", async function (req, res) {
+// View user's profile page
+routerBase.get("/profile", async (req, res) => {
+  if (!req?.session?.loggedIn) res.redirect("/");
   try {
-    if (!req?.session?.loggedIn) res.redirect("/");
+    const user = await getSessionUser(req);
+
+    res.render("../views/profilepage.hbs", {
+      username: user.dataValues.username,
+      steamUID: user.dataValues.steamId,
+      email: user.dataValues.email,
+      zipCode: user.dataValues.zipcode,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+});
+
+// View user's library
+routerBase.get("/gamelibrary", async function (req, res) {
+  if (!req?.session?.loggedIn) res.redirect("/");
+  try {
     const user = await getSessionUser(req);
     if (!user.dataValues.steamId)
       res.render("gamelibrary", {
@@ -57,6 +59,20 @@ routerBase.get("/gamelibrary", async function (req, res) {
     console.error("Error is here: ", err);
     res.status(500).send("Server Error");
   }
+});
+
+// Find matches for a game of given id
+routerBase.get("/findmatches/:id", (req, res) => {
+  if (!req?.session?.loggedIn) res.redirect("/");
+  res.render("../views/profilelist.hbs", {
+    profile: [
+      {
+        username: "Mock username",
+        steamUID: mockSteamId,
+        zipCode: 90210,
+      },
+    ],
+  });
 });
 
 module.exports = routerBase;
