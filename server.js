@@ -47,25 +47,6 @@ app.engine(
 
 app.set("view engine", "hbs");
 
-// app.get("/profilepage", function (req, res) {
-//   res.render("profilepage", {
-//     profiledetails: [
-//       {
-//         username: "Peter",
-//         steamUID: "COD",
-//         image: "https://picsum.photos/500/500?2",
-//         zipCode: "80016",
-//         comments: [],
-//       },
-//     ],
-//   });
-// });
-
-// //route to test variable access by main layout
-// app.get("/test/auth", function (req, res) {
-//   res.render("");
-// });
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
