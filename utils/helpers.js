@@ -48,8 +48,9 @@ async function getGamesFromDb(userId) {
     include: {
       model: Games,
     },
+    limit: 120,
   });
-  return result.dataValues.games.slice(0, 120);
+  return result.dataValues.games;
 }
 
 async function getUserbyUsername(query) {
