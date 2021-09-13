@@ -84,9 +84,6 @@
               id="username"
               aria-describedby="emailHelp"
             />
-            <div id="emailHelp" class="form-text text-light">
-              We'll never share your email with anyone else.
-            </div>
           </div>
           <div class="mb-3">
             <label
@@ -153,9 +150,9 @@
               id="userEmail"
               aria-describedby="emailHelp"
             />
-            <div id="emailHelp" class="form-text text-light">
+            {{! <div id="emailHelp" class="form-text text-light">
               We'll never share your email with anyone else.
-            </div>
+            </div> }}
           </div>
           <div class="mb-3">
             <label
@@ -172,9 +169,9 @@
             <label
               for="steamUID"
               class="form-label text-light text-center"
-            >Steam Username</label>
+            >Steam Id</label>
             <input
-              type="text"
+              type="number"
               class="form-control bg-secondary"
               id="steamUID"
             />
