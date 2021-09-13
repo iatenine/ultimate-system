@@ -1,7 +1,9 @@
+const { Games } = require("../models");
 const {
   getGameLibrary,
   getSessionUser,
   getPlayersWithGame,
+  updateGameDatabase,
 } = require("../utils/helpers");
 const routerBase = require("express").Router();
 const mockSteamId = "76561197960434622"; // For development purposes only
@@ -39,26 +41,21 @@ routerBase.get("/gamelibrary", async function (req, res) {
   if (!req?.session?.loggedIn) res.redirect("/");
   try {
     const user = await getSessionUser(req);
-    if (!user.dataValues.steamId)
-      res.render("gamelibrary", {
-        games: [],
-      });
-    else {
-      const steamId = user.dataValues.steamId.toString();
-      const library = await getGameLibrary(steamId, 120);
-      const viewLibrary = [];
-      if (library.length > 0)
-        library.forEach((elem) => {
-          viewLibrary.push({
-            gametitle: elem.name,
-            appID: elem.appid,
-          });
+    updateGameDatabase(user);
+    const steamId = user.dataValues.steamId.toString();
+    const library = await getGameLibrary(steamId, 120);
+    const viewLibrary = [];
+    if (library.length > 0 && user.dataValues.steamId)
+      library.forEach(async (elem) => {
+        viewLibrary.push({
+          gametitle: elem.name,
+          appID: elem.appid,
         });
-
-      res.render("gamelibrary", {
-        games: viewLibrary,
       });
-    }
+
+    res.render("gamelibrary", {
+      games: viewLibrary,
+    });
   } catch (err) {
     console.error("Error is here: ", err);
     res.status(500).send("Server Error");
@@ -76,7 +73,7 @@ routerBase.get("/findmatches/:id", async (req, res) => {
     if (elem.dataValues.username !== currentUser.dataValues.username) {
       const newData = {
         username: elem.dataValues.username,
-        steamID: elem.dataValues.steamId,
+        steamUID: elem.dataValues.steamId,
         zipCode: elem.dataValues.zipcode,
       };
       playerData.push(newData);
