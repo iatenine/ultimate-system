@@ -1,8 +1,40 @@
 {{>header}}
+
+{{!-- Side-by side container --}}
+<div class="container-fluid">
+    
+</div>
+
 <div class="container-fluid bg-black border border-info">
     <h1>Blurb</h1>
-  <h1 class="text-secondary">This application allows users to track their gaming history and see others gaming history all via the Steam platform. Players are also able to match with other gamers from around the world based on how often a individual plays a certain game. The goal of this application is to narrow down the tedius job of finding like minded gamers who enjoy the same gaming experience and games that the user enjoys.
+  <h2 class="text-secondary">This application allows users to track their gaming history and see others gaming history all via the Steam platform. 
+      Players are also able to match with other gamers from around the world based on how often a individual plays a certain game. The goal of this 
+      application is to narrow down the tedius job of finding like minded gamers who enjoy the same gaming experience and games that the user enjoys.
 </h1>
+<div class="row">
+    <div class="col-6">
+        <form class="input-group">
+            <button 
+            class="btn btn-success form-control"
+            id="login-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#login">
+                Login
+            </button>
+        </form>
+    </div>
+    <div class="col-6">
+        <form class="input-group">
+            <button 
+            class="btn btn-success form-control"
+            id="homepage-register-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#register">
+                Register
+            </button>
+        </form>
+    </div>
+</div>
 </div>
 {{>footer}}
 

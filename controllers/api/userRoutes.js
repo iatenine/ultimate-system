@@ -102,13 +102,6 @@ router.get("/library/:id", async (req, res) => {
   }
 });
 
-// Logout user and end session
-router.get("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/");
-  });
-});
-
 router.get("/", async (req, res) => {
   const sessionUser = await getSessionUser(req);
   if (!sessionUser) res.status(403).end();

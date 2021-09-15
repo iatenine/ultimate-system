@@ -16,7 +16,7 @@ routerBase.get("/", async (req, res) => {
     res.redirect("/gamelibrary");
   } else
     res.render("../views/welcome.hbs", {
-      loggedIn: false,
+      loggedIn: req.session.loggedIn,
     });
 });
 
@@ -27,6 +27,7 @@ routerBase.get("/profile", async (req, res) => {
     const user = await getSessionUser(req);
 
     res.render("../views/profilepage.hbs", {
+      loggedIn: req.session.loggedIn,
       username: user.dataValues.username,
       steamUID: user.dataValues.steamId,
       email: user.dataValues.email,
@@ -53,6 +54,7 @@ routerBase.get("/gamelibrary", async function (req, res) {
     });
 
     res.render("gamelibrary", {
+      loggedIn: req.session.loggedIn,
       games: viewLibrary,
     });
   } catch (err) {
@@ -79,7 +81,15 @@ routerBase.get("/findmatches/:id", async (req, res) => {
     }
   });
   res.render("../views/profilelist.hbs", {
+    loggedIn: true,
     profile: playerData,
+  });
+});
+
+// Logout user and end session
+routerBase.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
   });
 });
 
