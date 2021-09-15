@@ -20,38 +20,30 @@
     <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
       <ul class="d-flex navbar-nav mb-2 mb-lg-0 w-100">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/gamelibrary">Game Library</a>
+          <a class="nav-link" href="/gamelibrary">Library</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profile</a>
         </li>
         <li class="nav-item ms-auto">
           {{! Display if loggedin set to false }}
-          {{!-- {{#if loggedIn}} --}}
-          <p
-            class="nav-link active"
-            aria-current="page"
-            data-bs-toggle="modal"
-            data-bs-target="#login"
-          >
-            Login/Register
-          </p>
-          {{! Display if logged in }}
-          {{!-- {{#else}} --}}
-          <p
-            id="logout-btn"
-            class="nav-link active"
-            aria-current="page"
-            data-bs-toggle="modal"
-            data-bs-target="#logout"
-          >
-            Logout
-          </p>
-          <script src="./js/logout.js"></script>
-          {{!-- {{/if}} --}}
+          {{#if loggedIn}}
+            <a class="nav-link" href="/logout">Logout</a>
+            {{! Display if logged in }}
+            <script src="./js/logout.js"></script>
+          {{else}}
+            {{! <p
+              id="logout-btn"
+              class="nav-link active"
+              aria-current="page"
+              data-bs-toggle="modal"
+              data-bs-target="#logout"
+            >
+              Log in
+            </p> }}
+
+          {{/if}}
+
         </li>
       </ul>
     </div>
@@ -96,28 +88,9 @@
               id="userPassword"
             />
           </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="stayLogin" />
-            <label class="form-check-label text-light" for="stayLogin">Keep me
-              logged in</label>
-          </div>
-          <button
-            id="stayloggedin"
-            type="submit"
-            class="btn btn-secondary"
-          >Login</button>
+          <button id="stayloggedin" class="btn btn-secondary">Login</button>
           {{! <a href="/details"></a> }}
         </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-secondary"
-          data-bs-target="#register"
-          data-bs-toggle="modal"
-          data-bs-dismiss="modal"
-        >
-          Register
-        </button>
       </div>
     </div>
   </div>
@@ -147,7 +120,7 @@
             <input
               type="text"
               class="form-control bg-secondary"
-              id="userEmail"
+              id="register-username-input"
               aria-describedby="emailHelp"
             />
             {{! <div id="emailHelp" class="form-text text-light">
@@ -169,33 +142,28 @@
             <label
               for="steamUID"
               class="form-label text-light text-center"
-            >Steam Id</label>
+            >Steam Id</label><small><em>
+                Under Steam username in Account Details</em></small>
             <input
               type="number"
               class="form-control bg-secondary"
-              id="steamUID"
+              id="register-steamUID"
             />
           </div>
           <div class="mb-3">
             <label for="zipCode" class="form-label text-light text-center">Zip
               Code</label>
-            <input type="text" class="form-control bg-secondary" id="zipCode" />
+            <input
+              type="text"
+              class="form-control bg-secondary"
+              id="register-zipCode"
+            />
           </div>
-          <button id="registerID" class="btn btn-secondary">Register</button>
+          <button id="register-btn" class="btn btn-secondary">Register</button>
         </form>
       </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-secondary"
-          data-bs-target="#login"
-          data-bs-toggle="modal"
-        >
-          login
-          {{! <a href="/details">Login</a> }}
-        </button>
 
-        <script src="/js/login.js"></script>
-      </div>
+      <script src="/js/login.js"></script>
     </div>
   </div>
 </div>
