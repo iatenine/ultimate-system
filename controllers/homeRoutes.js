@@ -41,7 +41,9 @@ routerBase.get("/profile", async (req, res) => {
 
 // View about page
 routerBase.get("/credits", (req, res) => {
-  res.render("../views/credits.hbs");
+  res.render("../views/credits.hbs", {
+    loggedIn: req.session.loggedIn,
+  });
 });
 
 // View user's library
