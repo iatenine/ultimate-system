@@ -44,9 +44,9 @@ h1 {
   object-fit: cover;
 }
 
-.card-img-top-top {
+.card-img-top {
   max-width: 100%;
-  max-height: auto;
+  height: 70%;
 }
 
 .card {
@@ -58,8 +58,9 @@ h1 {
 }
 
 .game-card {
-  overflow: ellipsis;
-  height: 15rem;
+  white-space: nowrap;
+  overflow: none;
+  height: 16rem;
 }
 
 .card-body {
