@@ -1,30 +1,106 @@
-<script
+{{! <script
   src="https://platform.linkedin.com/badges/js/profile.js"
   async
   defer
-></script>
+></script> }}
 
-<div class="d-flex w-100 mt-2 justify-content-around" id="linkedin-badges">
-  <div class="row">
-    <div
-      class="badge-base LI-profile-badge"
-      data-locale="en_US"
-      data-size="medium"
-      data-theme="dark"
-      data-type="HORIZONTAL"
-      data-vanity="cav3mancomputers"
-      data-version="v1"
-    >
+<div class="d-flex flex-wrap w-100 mt-2">
+
+  {{! First card }}
+  <div class="card w-25 mx-2 mb-2">
+    <img
+      class="card-img-top h-75 profile-img"
+      src="/img/greg-profile.jpeg"
+      alt="Card image cap"
+    />
+    <div class="card-body text-light">
+      <h5 class="card-title text-light">Greg Friel</h5>
+      <h6>Frontend Engineer</h6>
+      <a
+        href="https://www.linkedin.com/in/gregory-friel-ba750646/"
+        class="btn btn-secondary"
+        target="no_blank"
+      >LinkedIn</a>
     </div>
-    <div
-      class="badge-base LI-profile-badge"
-      data-locale="en_US"
-      data-size="medium"
-      data-theme="dark"
-      data-type="HORIZONTAL"
-      data-vanity="jack-linhart"
-      data-version="v1"
-    ></div>
+  </div>
+
+  {{! Second card }}
+
+  <div class="card w-25 mx-2 mb-2">
+    <img
+      class="card-img-top h-75 profile-img"
+      src="/img/caveman-profile.jpeg"
+      alt="Card image cap"
+    />
+    <div class="card-body text-light">
+      <h5 class="card-title text-light">Matthew Hazelwood</h5>
+      <h6>Frontend Engineer</h6>
+      <a
+        href="https://www.linkedin.com/in/cav3mancomputers/"
+        class="btn btn-secondary"
+        target="no_blank"
+      >LinkedIn</a>
+    </div>
+  </div>
+
+  {{! Third card }}
+  <div class="card w-25 mx-2 mb-2">
+    <img
+      class="card-img-top h-75 profile-img"
+      src="/img/daniel-profile.jpeg"
+      alt="Card image cap"
+    />
+    <div class="card-body text-light">
+      <h5 class="card-title text-light">Daniel Possehl</h5>
+      <h6>Backend Engineer</h6>
+      <a
+        href="https://www.linkedin.com/in/daniel-possehl-a2aa24b4/"
+        class="btn btn-secondary"
+        target="no_blank"
+      >LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+{{! Fourth card }}
+<div class="card w-25 mx-2 mb-2">
+  <img
+    class="card-img-top h-75 profile-img"
+    src="/img/jack-profile.png"
+    alt="Card image cap"
+  />
+  <div class="card-body text-light">
+    <h5 class="card-title text-light">Jack Linhart</h5>
+    <h6>Backend Engineer</h6>
+    <a
+      href="https://linkedin.com/in/jack-linhart"
+      class="btn btn-secondary"
+      target="no_blank"
+    >LinkedIn</a>
+  </div>
+</div>
+
+{{! 
+<div class="d-flex w-100 mt-2 justify-content-around" id="linkedin-badges">
+  <div
+    class="badge-base LI-profile-badge"
+    data-locale="en_US"
+    data-size="medium"
+    data-theme="dark"
+    data-type="HORIZONTAL"
+    data-vanity="cav3mancomputers"
+    data-version="v1"
+  >
+  </div>
+  <div
+    class="badge-base LI-profile-badge"
+    data-locale="en_US"
+    data-size="medium"
+    data-theme="dark"
+    data-type="HORIZONTAL"
+    data-vanity="jack-linhart"
+    data-version="v1"
+  >
   </div>
   <div class="row">
     <div
@@ -46,4 +122,4 @@
       data-version="v1"
     ></div>
   </div>
-</div>
+</div> }}

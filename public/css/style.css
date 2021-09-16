@@ -40,6 +40,10 @@ h1 {
   max-height: 100%;
 }
 
+.profile-img {
+  object-fit: cover;
+}
+
 .card-img-top-top {
   max-width: 100%;
   max-height: auto;
@@ -48,14 +52,20 @@ h1 {
 .card {
   display: flex;
   flex-direction: column;
+  color: white;
   width: auto;
-  height: 100%;
+  background-color: greenyellow !important;
+}
+
+.game-card {
+  overflow: ellipsis;
+  height: 15rem;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
-  background-color: slategray;
+  background-color: rgb(36, 36, 36);
   overflow: hidden;
 }
 
@@ -73,8 +83,9 @@ h1 {
 }
 
 .card-title {
-  color: black;
-  height: 100%;
+  color: white;
+  text-align: center;
+  height: 1.4rem;
   overflow-y: ellipsis;
 }
 
