@@ -19,8 +19,17 @@ footer {
   background-image: url("https://i.pinimg.com/originals/f9/10/93/f91093b7300c29a32145131a7762b70f.jpg");
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   font-family: "VT323", monospace;
+}
+
+h1 {
   color: greenyellow;
   text-align: center;
   margin-top: 100px;

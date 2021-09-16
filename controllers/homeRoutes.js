@@ -39,6 +39,11 @@ routerBase.get("/profile", async (req, res) => {
   }
 });
 
+// View about page
+routerBase.get("/credits", (req, res) => {
+  res.render("../views/credits.hbs");
+});
+
 // View user's library
 routerBase.get("/gamelibrary", async function (req, res) {
   if (!req?.session?.loggedIn) res.redirect("/");
