@@ -45,7 +45,7 @@ const registerHandler = async (event) => {
   console.log(username, password, steamId, zipcode);
   // set the background of usernameField to white
   usernameField.style.backgroundColor = "white";
-  if (!username || isAlphaNumeric(username) === false) {
+  if (!username) {
     usernameField.style.boxShadow = errorBox;
   } else {
     usernameField.style.boxShadow = successBox;
@@ -70,7 +70,7 @@ const registerHandler = async (event) => {
   }
 
   if (username && password) {
-    const response = await fetch("/api/usears/d", {
+    const response = await fetch("/api/users/", {
       method: "POST",
       body: JSON.stringify({ username, password, steamId, zipcode }),
       headers: { "Content-Type": "application/json" },
