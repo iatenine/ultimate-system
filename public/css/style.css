@@ -19,8 +19,17 @@ footer {
   background-image: url("https://i.pinimg.com/originals/f9/10/93/f91093b7300c29a32145131a7762b70f.jpg");
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   font-family: "VT323", monospace;
+}
+
+h1 {
   color: greenyellow;
   text-align: center;
   margin-top: 100px;
@@ -31,22 +40,33 @@ h1 {
   max-height: 100%;
 }
 
-.card-img-top-top {
+.profile-img {
+  object-fit: cover;
+}
+
+.card-img-top {
   max-width: 100%;
-  max-height: auto;
+  height: 70%;
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  color: white;
   width: auto;
-  height: 100%;
+  background-color: greenyellow !important;
+}
+
+.game-card {
+  white-space: nowrap;
+  overflow: none;
+  height: 16rem;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
-  background-color: slategray;
+  background-color: rgb(36, 36, 36);
   overflow: hidden;
 }
 
@@ -64,8 +84,9 @@ h1 {
 }
 
 .card-title {
-  color: black;
-  height: 100%;
+  color: white;
+  text-align: center;
+  height: 1.4rem;
   overflow-y: ellipsis;
 }
 
