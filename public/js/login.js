@@ -1,8 +1,6 @@
 const loginFormHandler = async (event) => {
-  // TODO: Add a comment describing the functionality of this statement
   event.preventDefault();
 
-  // TODO: Add a comment describing the functionality of these expressions
   const username = document.querySelector("#username").value.trim();
   const password = document.querySelector("#userPassword").value.trim();
 
@@ -91,15 +89,23 @@ $(document).ready(function () {
     .addEventListener("click", registerHandler);
   // Login and register buttons (on homepage) will refresh page
   // if default isn't prevented
-  document.querySelector("#login-btn").addEventListener("click", (e) => {
-    e.preventDefault();
-  });
-  document
-    .querySelector("#homepage-register-btn")
-    .addEventListener("click", (e) => {
+  if (document.querySelector("#login-btn")) {
+    document.querySelector("#login-btn").addEventListener("click", (e) => {
       e.preventDefault();
     });
-  document
-    .querySelector("#stayloggedin")
-    .addEventListener("click", loginFormHandler);
+  }
+
+  if (document.querySelector("#homepage-register-btn")) {
+    document
+      .querySelector("#homepage-register-btn")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+  }
+
+  if (document.querySelector("#stayloggedin")) {
+    document
+      .querySelector("#stayloggedin")
+      .addEventListener("click", loginFormHandler);
+  }
 });
