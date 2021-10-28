@@ -8,6 +8,7 @@ const controllers = require("./controllers");
 const User = require("./models/User");
 const Games = require("./models/Games");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+var compression = require("compression");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +25,7 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(compression());
 
 app.use(cookieParser());
 const hbs = exphbs.create({});
