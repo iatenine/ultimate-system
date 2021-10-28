@@ -86,6 +86,24 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Protected put route to update user profile
+router.put("/updateProfile", async (req, res) => {
+  if (req?.session?.loggedIn) res.status(403).end();
+  try {
+    const user = await User.findByPk(req.session.userId);
+    // strip all items except steamid and zipcode from req.body
+    const sanitizedBody = {
+      steamid: req.body?.steamid ? req.body.steamid : user.steamid,
+      zipcode: req.body?.zipcode ? req.body.zipcode : user.zipcode,
+    };
+    const result = await user.update(sanitizedBody);
+    res.status(201).json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 router.get("/library/:id", async (req, res) => {
   try {
     const library = await User.findOne({
