@@ -48,31 +48,32 @@ const updateButton = () => {
     updateProfileButton.removeClass("disabled");
 };
 
-updateProfileButton.click(updateProfile);
+const updateProfile = async (e) => {
+  e.preventDefault();
+  const newZip = zipcodeInput.val();
+  const newUID = uidInput.val();
 
-const updateProfile = () => {
-    const newZip = zipcodeInput.val();
-    const newUID = uidInput.val();
+  // Only enable update button if all inputs are valid
+  if (isZipCodeValid(newZip) && !isNaN(newUID) && newUID.length === 17) {
+    const response = await fetch("/api/users/updateProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        zipcode: newZip,
+        steamid: newUID,
+      }),
+    });
+    if (response.ok) {
+      window.location.reload();
+    } else {
+      alert("Error updating profile: ", response.statusText);
+    }
+  }
+};
 
-    // Only enable update button if all inputs are valid
-    if(isZipCodeValid(newZip) && !isNaN(newUID) && newUID.length === 17) {
-        $.ajax({
-            url: "/updateProfile",
-            type: "PUT",
-            data: {
-                zipcode: newZip,
-                steamId: newUID
-            },
-        }).done(function(data) {
-            if(data.success) {
-                window.location.href = "/profile";
-            }
-        }).fail(
-            function(data) {
-                console.error(data);
-            }
-        )
-}
+updateProfileButton.click((e) => updateProfile(e));
 
 // Just some inline test-driven development. Nothing to see here.
 console.assert(isZipCodeValid("H0H 0H0") === true);
