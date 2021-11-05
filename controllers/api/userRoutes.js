@@ -68,7 +68,7 @@ router.put("/updateProfile", async (req, res) => {
     const user = await User.findByPk(req.session.userId);
     // strip all items except steamid and zipcode from req.body
     const sanitizedBody = {
-      steamid: req.body?.steamid ? req.body.steamid : user.steamid,
+      steamId: req.body?.steamId ? req.body.steamId : user.steamId,
       zipcode: req.body?.zipcode ? req.body.zipcode : user.zipcode,
     };
     const result = await user.update(sanitizedBody);

@@ -62,7 +62,7 @@ const updateProfile = async (e) => {
       },
       body: JSON.stringify({
         zipcode: newZip,
-        steamid: newUID,
+        steamId: newUID,
       }),
     });
     if (response.ok) {

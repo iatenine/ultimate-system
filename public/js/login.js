@@ -1,3 +1,6 @@
+const emailRegex =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -33,12 +36,14 @@ const registerHandler = async (event) => {
   const passwordField = document.querySelector("#registerPassword");
   const confirmPasswordField = document.querySelector("#confirmPassword");
   const steamIdField = document.querySelector("#register-steamUID");
+  const emailField = document.querySelector("#register-email-input");
   const zipCodeField = document.querySelector("#register-zipCode");
 
   const username = usernameField.value.trim();
   const password = passwordField.value.trim();
   const confirmPassword = confirmPasswordField.value.trim();
   const steamId = steamIdField.value.trim();
+  const email = emailField.value.trim();
   const zipcode = zipCodeField.value.trim();
 
   console.log(username, password, steamId, zipcode);
@@ -54,6 +59,7 @@ const registerHandler = async (event) => {
       : errorBox;
   steamIdField.style.boxShadow =
     steamId || isNaN(steamID) ? successBox : errorBox;
+  emailField.style.boxShadow = emailRegex.test(email) ? successBox : errorBox;
   zipCodeField.style.boxShadow =
     zipcode && zipcode.length >= 5 && zipcode.length <= 6
       ? successBox
@@ -64,10 +70,18 @@ const registerHandler = async (event) => {
     return;
   }
 
+  if (!emailRegex.test(email)) return;
+
   if (username && password) {
     const response = await fetch("/api/users/", {
       method: "POST",
-      body: JSON.stringify({ username, password, steamId, zipcode }),
+      body: JSON.stringify({
+        username,
+        password,
+        steamId,
+        email,
+        zipcode,
+      }),
       headers: { "Content-Type": "application/json" },
     });
 
