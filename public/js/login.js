@@ -1,3 +1,6 @@
+const emailRegex =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -31,46 +34,54 @@ const registerHandler = async (event) => {
   // store references to the form elements
   const usernameField = document.querySelector("#register-username-input");
   const passwordField = document.querySelector("#registerPassword");
-  // const confirmPasswordField = document.querySelector("#confirmPassword");
+  const confirmPasswordField = document.querySelector("#confirmPassword");
   const steamIdField = document.querySelector("#register-steamUID");
+  const emailField = document.querySelector("#register-email-input");
   const zipCodeField = document.querySelector("#register-zipCode");
 
   const username = usernameField.value.trim();
   const password = passwordField.value.trim();
+  const confirmPassword = confirmPasswordField.value.trim();
   const steamId = steamIdField.value.trim();
+  const email = emailField.value.trim();
   const zipcode = zipCodeField.value.trim();
 
   console.log(username, password, steamId, zipcode);
   // set the background of usernameField to white
   usernameField.style.backgroundColor = "white";
-  if (!username) {
-    usernameField.style.boxShadow = errorBox;
-  } else {
-    usernameField.style.boxShadow = successBox;
+
+  // Highlight all invalid inputs red
+  usernameField.style.boxShadow = username ? successBox : errorBox;
+  passwordField.style.boxShadow = password ? successBox : errorBox;
+  confirmPasswordField.style.boxShadow =
+    confirmPassword === password && confirmPassword.length > 0
+      ? successBox
+      : errorBox;
+  steamIdField.style.boxShadow =
+    steamId || isNaN(steamID) ? successBox : errorBox;
+  emailField.style.boxShadow = emailRegex.test(email) ? successBox : errorBox;
+  zipCodeField.style.boxShadow =
+    zipcode && zipcode.length >= 5 && zipcode.length <= 6
+      ? successBox
+      : errorBox;
+
+  if (password !== confirmPassword) {
+    confirmPasswordField.style.boxShadow = errorBox;
+    return;
   }
 
-  if (!password) {
-    passwordField.style.boxShadow = errorBox;
-  } else {
-    passwordField.style.boxShadow = successBox;
-  }
-
-  if (!steamId || isNaN(steamId)) {
-    steamIdField.style.boxShadow = errorBox;
-  } else {
-    steamIdField.style.boxShadow = successBox;
-  }
-
-  if (!zipcode || zipcode.length < 5 || zipcode.length > 6) {
-    zipCodeField.style.boxShadow = errorBox;
-  } else {
-    zipCodeField.style.boxShadow = successBox;
-  }
+  if (!emailRegex.test(email)) return;
 
   if (username && password) {
     const response = await fetch("/api/users/", {
       method: "POST",
-      body: JSON.stringify({ username, password, steamId, zipcode }),
+      body: JSON.stringify({
+        username,
+        password,
+        steamId,
+        email,
+        zipcode,
+      }),
       headers: { "Content-Type": "application/json" },
     });
 
